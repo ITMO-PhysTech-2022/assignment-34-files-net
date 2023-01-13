@@ -4,7 +4,11 @@ on:
   pull-request:
     types: [ opened, edited, synchronize ]
     paths:
-      - './tests/main/s1/test_config.py'
+      - 'tasks/main.py'
+      - 'tasks/driver/files/commands.py'
+      - 'tasks/driver/network/commands.py'
+      - 'resources/scripts/'
+      - 'tests/main/s1/test_config.py'
       - '.github/workflows/config$display.yaml'
   workflow_dispatch:
 
@@ -21,10 +25,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.11
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           pip install pytest decorator requests
       - run: |
-          pytest ./tests/main/s1/test_config.py::TestConfig.py::test_display
+          pytest tests/main/s1/test_config.py::TestConfig.py::test_display
