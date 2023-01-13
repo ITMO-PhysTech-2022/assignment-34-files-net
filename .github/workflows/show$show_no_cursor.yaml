@@ -1,7 +1,7 @@
 name: '2.show::test_show_no_cursor'
 
 on:
-  pull-request:
+  pull_request:
     types: [ opened, edited, synchronize ]
     paths:
       - 'tasks/main.py'

@@ -1,7 +1,7 @@
 name: '1.config::test_display'
 
 on:
-  pull-request:
+  pull_request:
     types: [ opened, edited, synchronize ]
     paths:
       - 'tasks/main.py'

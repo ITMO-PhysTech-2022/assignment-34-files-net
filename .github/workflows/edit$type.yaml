@@ -1,7 +1,7 @@
 name: '2.edit::test_type'
 
 on:
-  pull-request:
+  pull_request:
     types: [ opened, edited, synchronize ]
     paths:
       - 'tasks/main.py'

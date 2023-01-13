@@ -1,7 +1,7 @@
 name: '1.runs::test_runs'
 
 on:
-  pull-request:
+  pull_request:
     types: [ opened, edited, synchronize ]
     paths:
       - 'tasks/main.py'

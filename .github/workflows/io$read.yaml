@@ -1,7 +1,7 @@
 name: '2.io::test_read'
 
 on:
-  pull-request:
+  pull_request:
     types: [ opened, edited, synchronize ]
     paths:
       - 'tasks/main.py'
