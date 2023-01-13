@@ -31,4 +31,4 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install pytest decorator requests
       - run: |
-          pytest test/main/s2/test_io.py::TestIo.py::test_save
+          pytest test/main/s2/test_io.py::TestIO::test_save

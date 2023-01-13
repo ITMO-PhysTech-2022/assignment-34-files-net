@@ -31,4 +31,4 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install pytest decorator requests
       - run: |
-          pytest test/main/s3/test_sockets.py::TestSockets.py::test_send_receive
+          pytest test/main/s3/test_sockets.py::TestSockets::test_send_receive
