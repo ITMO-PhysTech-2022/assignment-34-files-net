@@ -21,7 +21,7 @@ class TestBonus:
     def test_send_receive(self, lines, count):
         server, client = spawn(auto_exit=True), spawn(auto_exit=True)
         with tmpcd(root_directory()), tmpfile('tasks/config.json') as config_file, \
-                tmpdir(process.resources / 'tmp/send-receive', keep=True) as tmp:
+                tmpdir(server.resources / 'tmp/send-receive', keep=True) as tmp:
             config_file.write(json.dumps(config(False, -1, '$'), indent=2))
             for item in os.listdir(tmp.path):
                 path = tmp.path / item
@@ -34,7 +34,7 @@ class TestBonus:
                 [random_line(10, 10, utf8=True) for _ in range(lines)]
                 for _ in range(count)
             ]
-            for file in len(content):
+            for file in range(len(content)):
                 content[file] = '\n'.join(content[file]).encode('utf-8')
                 with open(tmp.loc(f'{file + 1}'), 'wb') as input_file:
                     input_file.write(content[file])
@@ -56,8 +56,8 @@ class TestBonus:
                 spec_run.__name__ = 'run.execute[send+receive]'
                 runner = create(spec_run, '3.B#send+receive')
 
-                if not (process.resources / 'scripts/send.s').exists() or \
-                        not (process.resources / 'scripts/receive.s').exists():
+                if not (server.resources / 'scripts/send.s').exists() or \
+                        not (server.resources / 'scripts/receive.s').exists():
                     msg = 'Скрипт `send.s` и/или `receive.s` не найден'
                     runner.report_wa(f'{runner.test_name}/exits.script', None, None, msg)
                     pytest.fail(msg)
@@ -65,11 +65,11 @@ class TestBonus:
                     runner.multitest(
                         runner.manual('S', f'exec main.vars["PATH"] = {repr(str(tmp.path))}', 1).just_returns(),
                         runner.manual('S', f'exec main.vars["COUNT"] = {count}', 1).just_returns(),
-                        runner.manual('S', f'execute {process.resources / "scripts/receive.s"}', 0).just_returns(),
+                        runner.manual('S', f'execute {server.resources / "scripts/receive.s"}', 0).just_returns(),
 
                         runner.manual('C', f'exec main.vars["PATH"] = {repr(str(tmp.path / "out"))}', 1).just_returns(),
                         runner.manual('C', f'exec main.vars["COUNT"] = {count}', 1).just_returns(),
-                        runner.manual('C', f'execute {process.resources / "scripts/send.s"}', 0).just_returns(),
+                        runner.manual('C', f'execute {server.resources / "scripts/send.s"}', 0).just_returns(),
                     )
 
                 time.sleep(2)
