@@ -16,7 +16,7 @@ jobs:
   test-process:
     timeout-minutes: 1
     name: 'test-process'
-    runs-on: [ self-hosted, ubuntu-latest ]
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3

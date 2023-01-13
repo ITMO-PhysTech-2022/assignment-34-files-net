@@ -16,7 +16,7 @@ jobs:
   test-comment_uncomment:
     timeout-minutes: 1
     name: 'test-comment_uncomment'
-    runs-on: [ self-hosted, ubuntu-latest ]
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3

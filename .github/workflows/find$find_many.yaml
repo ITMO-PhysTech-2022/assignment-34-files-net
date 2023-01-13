@@ -16,7 +16,7 @@ jobs:
   test-find_many:
     timeout-minutes: 1
     name: 'test-find_many'
-    runs-on: [ self-hosted, ubuntu-latest ]
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v3
