@@ -39,7 +39,10 @@ class Process:
         self.root = root_directory()
         self.resources = self.root / 'resources'
         os.environ['PYTHONIOENCODING'] = 'utf-8'
-        os.environ['PYTHONPATH'] = f'{os.environ["PYTHONPATH"]}{os.pathsep}{self.root}'
+        pythonpath = os.environ.get('PYTHONPATH', '')
+        if pythonpath != '':
+            pythonpath += os.pathsep
+        os.environ['PYTHONPATH'] = f'{pythonpath}{self.root}'
 
         self.path = 'tasks/main.py'
         self.commands = self.root / 'tasks/driver/files/commands.py'
