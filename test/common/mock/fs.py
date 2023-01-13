@@ -17,7 +17,7 @@ class _TmpDir:
             self.clean = parent
 
     def __enter__(self):
-        self.path.mkdir(exist_ok=True)
+        self.path.mkdir(parents=True, exist_ok=True)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
