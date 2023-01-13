@@ -8,7 +8,7 @@ on:
       - 'tasks/driver/files/commands.py'
       - 'tasks/driver/network/commands.py'
       - 'resources/scripts/'
-      - 'tests/main/s1/test_runs.py'
+      - 'test/main/s1/test_runs.py'
       - '.github/workflows/runs$runs.yaml'
   workflow_dispatch:
 
@@ -16,14 +16,14 @@ jobs:
   test-runs:
     timeout-minutes: 1
     name: 'test-runs'
-    runs-on: [ self-hosted ]
+    runs-on: [ self-hosted, ubuntu-latest ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: dev
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.11
       - name: Install dependencies
@@ -31,4 +31,4 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install pytest decorator requests
       - run: |
-          pytest tests/main/s1/test_runs.py::TestRuns.py::test_runs
+          pytest test/main/s1/test_runs.py::TestRuns.py::test_runs
